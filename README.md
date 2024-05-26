@@ -63,24 +63,40 @@ Example:
 
 
 50 	public interface IPumpService
+
 51	{
+
 52		DateTime[] GetDateTimesWhereThePumpStarted (Pump pump);
+
 53
+
 54		int GetNumberOfStartsSinceDate (Pump pump, DateTime date);
+
 55
+
 56		bool HasPumpStarted TooMuchTimes (Pump pump);
+
 57
+
 58		Tuple<Pump, double> GetMost Efficient Pump (List<Pump> pumps);
+
 59
  
 
 
 PumpService.cs
+
 62	public class PumpService: IPumpService	
+
 63	{
+
 64		private ILogger<PumpService> logger;
+
 65		private IPumpDataProvider pumpDataProvider;
 66
+
 67		public PumpService()	
+
 68		{
+
 69			this.pumpDataProvider = new PumpDataProvider();
