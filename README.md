@@ -1,4 +1,5 @@
 Question 1/2-C#
+
 We have a pump that has a sensor measuring it's on/off status. The sensor stores all the values in a local database in a time series format 
 Example:
 
