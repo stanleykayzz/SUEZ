@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace KataSuez
 {
@@ -25,25 +27,17 @@ namespace KataSuez
 
         public static TimeSpan GetRunningDurationOnPeriod(Measure[] onOffMeasures, DateTime start, DateTime end)
         {
+            Measure[] sortedMeasures = onOffMeasures.OrderBy(m => m.Timestamp).ToArray();
             TimeSpan runningDuration = TimeSpan.Zero;
             DateTime? runningStart = null;
 
-            foreach (var measure in onOffMeasures)
+            foreach (var measure in sortedMeasures)
             {
-
                 if (measure.Timestamp < start)
                 {
-                    if (measure.State == 1)
-                    {
-                        runningStart = start;
-                    }
-                    else
-                    {
-                        runningStart = null;
-                    }
+                    runningStart = (measure.State == 1) ? start : null;
                     continue;
                 }
-
                 if (measure.Timestamp >= start && measure.Timestamp <= end)
                 {
                     if (measure.State == 1)
@@ -74,5 +68,4 @@ namespace KataSuez
         public DateTime Timestamp { get; set; }
         public int State { get; set; }
     }
-
 }
